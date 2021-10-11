@@ -44,15 +44,15 @@ jobs:
         run: |
           cd android && ./gradlew assembleRelease --no-daemon
 
-      # - name: Sign App Bundle
-      #   id: sign_app
-      #   uses: r0adkll/sign-android-release@v1
-      #   with:
-      #     releaseDirectory: android/app/build/outputs/apk/release
-      #     signingKeyBase64: ${{ secrets.HASHED_KEY_BASE64 }}
-      #     alias: ${{ secrets.KEY_ALIAS }}
-      #     keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-      #     keyPassword: ${{ secrets.KEY_PASSWORD }}
+      - name: Sign App Bundle
+        id: sign_app
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: android/app/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.HASHED_KEY_BASE64 }}
+          alias: ${{ secrets.KEY_ALIAS }}
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: Upload Signed Apk
         uses: actions/upload-artifact@v2
